@@ -1,22 +1,23 @@
 #include <iostream>
 #include <limits.h>
 #include <vector>
+using namespace std;
 
-void printOptimalParenthesis(std::vector<std::vector<int>>& s, int i, int j) {
+void printOptimalParenthesis(vector<vector<int>>& s, int i, int j) {
     if (i == j)
-        std::cout << "A" << i;
+        cout << "A" << i;
     else {
-        std::cout << "(";
+        cout << "(";
         printOptimalParenthesis(s, i, s[i][j]);
         printOptimalParenthesis(s, s[i][j] + 1, j);
-        std::cout << ")";
+        cout << ")";
     }
 }
 
-void matrixChainOrder(std::vector<int>& p) {
+void matrixChainOrder(vector<int>& p) {
     int n = p.size() - 1;
-    std::vector<std::vector<int>> m(n + 1, std::vector<int>(n + 1));
-    std::vector<std::vector<int>> s(n + 1, std::vector<int>(n + 1));
+    vector<vector<int>> m(n + 1, vector<int>(n + 1));
+    vector<vector<int>> s(n + 1, vector<int>(n + 1));
 
     for (int l = 2; l < n + 1; l++) {
         for (int i = 1; i < n - l + 2; i++) {
@@ -32,13 +33,13 @@ void matrixChainOrder(std::vector<int>& p) {
         }
     }
 
-    std::cout << "Optimal Parenthesization: ";
+    cout << "Optimal Parenthesization: ";
     printOptimalParenthesis(s, 1, n);
-    std::cout << "\nMinimum number of multiplications is " << m[1][n] << "\n";
+    cout << "\nMinimum number of multiplications is " << m[1][n] << "\n";
 }
 
 int main() {
-    std::vector<int> arr = {1, 2, 3, 4};
+    vector<int> arr = {5,4,6,2,3,1};
     matrixChainOrder(arr);
     return 0;
 }
